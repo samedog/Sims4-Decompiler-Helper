@@ -47,8 +47,8 @@
 @echo decompile, so its going to take a bit.  Enjoy!
 
 @echo Setting Directories...
-@set SIMS4DIR="C:\Games\The Sims 4"
-@set TEMPDIR="C:\Users\demon\Documents\SIMS4 MODS\Forex & Investments\Temp"
+@set SIMS4DIR="GAME_DIR"
+@set TEMPDIR="TEMP_DIR_FOR_PROCESSING"
 @set ZIPPROGRAM="C:\Program Files\7-Zip\7z.exe"
 
 @echo Checking if your Temp dir exists at %TEMPDIR%
