@@ -6,7 +6,7 @@ Requirenments
 
 decompyle3 (https://github.com/rocky/python-decompile3)
 
-uncompile6 (https://pypi.org/project/uncompyle6/)
+uncompyle6 (https://pypi.org/project/uncompyle6/)
 
 unpyc3 (https://github.com/andrew-tavera/unpyc37/blob/master/unpyc3.py)
 
