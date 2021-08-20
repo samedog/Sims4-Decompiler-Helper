@@ -29,10 +29,10 @@ echo Go get yourself some coffee, and wait awhile, all 3 zip's used for code tak
 echo decompile, so its going to take a bit.  Enjoy!
 
 echo Setting Directories...
-set SIMS4DIR=C:\Games\The Sims 4
-set TEMPDIR=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\Temp
-set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
-set UNPYC=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\unpyc3.py
+set SIMS4DIR="GAME_DIR"
+set TEMPDIR="TEMP_DIR_FOR_PROCESSING"
+set ZIPPROGRAM="C:\Program Files\7-Zip\7z.exe"
+set set UNPYC=PAH_TO_unpyc3.py
 
 echo "Checking if your Temp dir exists at %TEMPDIR%"
 
