@@ -10,7 +10,8 @@ uncompyle6 (https://pypi.org/project/uncompyle6/)
 
 unpyc3 (https://github.com/andrew-tavera/unpyc37/blob/master/unpyc3.py)
 
-set   
+
+edit and fill as needed:  
 
 set SIMS4DIR="GAME_DIR"
 
@@ -21,5 +22,5 @@ set ZIPPROGRAM="C:\Program Files\7-Zip\7z.exe"
 set set UNPYC=PAH_TO_unpyc3.py
 
 
-place unpyc3 in the same folder as this script, and launch from cmd, powershell or doubleclick
+launch from cmd, powershell or doubleclick
 
