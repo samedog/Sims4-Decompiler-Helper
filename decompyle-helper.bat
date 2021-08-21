@@ -34,17 +34,7 @@ set TEMPDIR="TEMP_DIR_FOR_PROCESSING"
 set ZIPPROGRAM="C:\Program Files\7-Zip\7z.exe"
 set set UNPYC=PAH_TO_unpyc3.py
 
-echo "Checking if your Temp dir exists at %TEMPDIR%"
-
-if exist "%TEMPDIR%" (
-	echo Folder exists
-) else (
-	echo "Creating %TEMPDIR%"
-	mkdir "%TEMPDIR%"
-	echo Done
-	pause
-)
-
+Call :CleanUp
 
 rem Main loop calls
 CALL :MainLoopFunction "base.zip"
@@ -62,20 +52,27 @@ rem ****************************************************************************
 	echo "Copying %zipname% to temp folder at %TEMPDIR%"
 	copy "%SIMS4DIR%\Data\Simulation\Gameplay\%zipname%" "%TEMPDIR%"
 
-	if %zipname% == base.zip (
-		set folder_name = "libs"
-		set zip_name = "libs\lib"
+	if %zipname% == "base.zip" (
+		set FOLDERNAME=libs
+		set ZIPPATH=libs\lib
+		set ZIPNAME=base-src.zip
+		set KEYLOCATION="%FOLDERNAME%\key"
 	)
-	if %zipname% == core.zip (
-		set folder_name = "core"
-		set zip_name = %folder_name%
+	if %zipname% == "core.zip" (
+		set FOLDERNAME=core
+		set ZIPPATH=core
+		set ZIPNAME=core-src.zip
+		set KEYLOCATION=key
 	)
-	if %zipname% == simulation.zip (
-		set folder_name = "simulation"
-		set zip_name = %folder_name%
+	if %zipname% == "simulation.zip" (
+		set FOLDERNAME=simulation
+		set ZIPPATH=simulation
+		set ZIPNAME=simulation-src.zip
+		set KEYLOCATION=key
 	)
 
-	"%ZIPPROGRAM%" x "%TEMPDIR%\%zipname%" -o"%TEMPDIR%\%folder_name%"
+
+	"%ZIPPROGRAM%" x "%TEMPDIR%\%zipname%" -o"%TEMPDIR%\%FOLDERNAME%"
 
 	if exist "%TEMPDIR%\%zipname%" (
 		echo "Deleting Old %zipname%"
@@ -83,28 +80,26 @@ rem ****************************************************************************
 		echo Done
 	)
 	
-	set TD="%TEMPDIR%\%folder_name%"
+	set TD="%TEMPDIR%\%FOLDERNAME%"
 
 	echo Decompiling %TD% and all subfolder PYC files (Warning Not all Files will Decompile properly) Press any key to start.
 	pause
 
 	CALL :DecompilerLoop %TD%
 
-	echo Done ... press any key to continue
-	pause
-
 	echo Removing pyc files
 	del /s %TD%\*.pyc
 
 	echo Zipping %folder_name% folder
-	"%ZIPPROGRAM%" a base-src.zip "%TEMPDIR%\libs\key" "%TEMPDIR%\%zip_name%"
+	"%ZIPPROGRAM%" a "%ZIPNAME%" "%TEMPDIR%\%KEYLOCATION%" "%TEMPDIR%\%ZIPPATH%"
 
 	echo Deleting Files and Folders
-	rmdir /s /q "%TEMPDIR%\%folder_name%"
-
+	
+	Call :CleanUp
+	
 	echo Done.. Press any Key to continue
 	pause
-
+EXIT /B 0
 
 rem this loops iterates over files and tries to decompile all pyc
 rem i use decompyle3 as main, uncompyle6 as backup and unpyc3 as last resort
@@ -113,7 +108,7 @@ rem (reliability over performance)
 	set pypath="%~1"
 	for /R %pypath% %%f in (*.pyc) do ( 
 		echo "****************************************************************************************************"
-		echo "Decompiling %%~df%%~pf%%~nf.pyc"
+		echo "Decompiling %%~pf%%~nf.pyc"
 		decompyle3 -o "%%~df%%~pf%%~nf.py" "%%~df%%~pf%%~nf.pyc" | find "Successfully decompiled file"
 		if errorlevel 1 ( 
 			echo "could not decompile file with decompyle3, trying uncompyle6"
@@ -122,23 +117,23 @@ rem (reliability over performance)
 				echo "=============================================================================="
 				echo "could not decompile trying unpyc3 as last resort"
 				echo "cross your fingers and check the file manually"
-				echo "%%~df%%~pf%%~nf.py"
+				echo "%%~pf%%~nf.py"
 				echo "=============================================================================="
 				python.exe "%UNPYC%" "%%~df%%~pf%%~nf.pyc" > "%%~df%%~pf%%~nf.py"
 				if %%~z%%~df%%~pf%%~nf.py == 0  (
 					echo "could not decompile with uncompyle6 or deompyle3 or unpyc3"
 				) else (
 					echo # Successfully decompiled file
-					echo "%%~df%%~pf%%~nf.pyc with unpyc3"
+					echo "%%~pf%%~nf.pyc with unpyc3"
 				)
 			) else ( 
-				echo "%%~df%%~pf%%~nf.pyc with uncompyle6"
+				echo "%%~pf%%~nf.pyc with uncompyle6"
 			)
 		) else ( 
-			echo "%%~df%%~pf%%~nf.pyc with decompyle3"	
+			echo "%%~pf%%~nf.pyc with decompyle3"	
 		)
 	)
-
+EXIT /B 0
 
 :VersionCheck
 	set program="%~1"
@@ -170,4 +165,21 @@ rem (reliability over performance)
 
 	)
 	echo:
-	
+EXIT /B 0
+
+:CleanUp
+	echo Checking if your Temp dir exists at "%TEMPDIR%"
+	if exist "%TEMPDIR%" (
+		echo File exists
+		del "%TEMPDIR%"
+	)
+	if exist "%TEMPDIR%"\ (
+		echo Folder exists
+		rmdir "%TEMPDIR%" /q /s
+	)
+
+	echo "Creating %TEMPDIR%"
+	mkdir "%TEMPDIR%"
+	echo Done
+	pause
+EXIT /B 0
