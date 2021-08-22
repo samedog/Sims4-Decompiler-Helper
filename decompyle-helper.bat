@@ -1,6 +1,5 @@
 @echo off
-rem Based on darkittens's script
-rem this batch uses 3 decompilers for max reliability
+rem based on theBatch file created by Darkkitten
 
 rem Setting up Versions
 
@@ -32,7 +31,7 @@ echo Setting Directories...
 set SIMS4DIR=GAME_DIR
 set TEMPDIR=TEMP_DIR_FOR_PROCESSING
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
-set set UNPYC=PAH_TO_unpyc3.py
+set UNPYC=PAH_TO_unpyc3.py
 
 Call :CleanUp 1
 
@@ -112,7 +111,7 @@ rem (reliability over performance)
 			uncompyle6 -o "%%~df%%~pf%%~nf.py" "%%~df%%~pf%%~nf.pyc" | find "Successfully decompiled file"
 			if errorlevel 1 ( 
 				echo "=============================================================================="
-				echo "could not decompile trying unpyc3 as last resort"
+				echo "could not decompile, trying unpyc3 as last resort"
 				echo "cross your fingers and check the file manually"
 				echo "%%~pf%%~nf.py"
 				echo "=============================================================================="
@@ -136,16 +135,22 @@ EXIT /B 0
 	set program="%~1"
 	set cur_ver="%~2"
 	set min_ver="%~3"
+	set dec_flag=0
 	set ucp_flag=0
+	set py_flag=0
 	set unpyc3_flag=0
 	echo -----------------------------------------------
 	echo Checking %program% Version
 	
-	if %program% == "python" ( set extra_steps="Please install Python 3.7 from the Microsoft store or thru conda" )
-	if %program% == "decompyle3" ( set extra_steps="Please install decompyle 3 from https://github.com/rocky/python-decompile3" )
+	if %program% == "python" ( 
+		set extra_steps="Please install Python 3.7 from the Microsoft store or thru conda" 
+		set py_flag=1
+		)
+	if %program% == "decompyle3" ( set dec_flag=1 )
 	if %program% == "uncompyle6" ( set ucp_flag=1 )
 	if %program% == "unpyc3" ( set unpyc3_flag=1 )
-	
+	rem we don't check for unpyc3 version, instead, we check if it exists
+	rem if no unpyc3 is being checked we go check the other programs
 	if "%unpyc3_flag%" geq "%min_ver%" (
 		if exist "unpyc3.py" (
 			echo unpyc3 is installed.
@@ -162,7 +167,13 @@ EXIT /B 0
 				echo Installing uncompyle6  
 				pip install uncompyle6
 				echo Done...
-			) else (
+			) 
+			if %dec_flag% geq 1 (
+				echo Installing decompyle3  
+				pip install git+https://github.com/rocky/python-decompile3
+				echo Done...
+			)
+			if %py_flag% geq 1(
 				echo %extra_steps%
 			)
 			echo '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
