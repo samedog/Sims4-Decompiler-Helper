@@ -1,4 +1,8 @@
 
+Even if this script was created for the sis 4 modding it works with any kind of .pyc file, just don't try 
+python 3.9+ because the flow is different and all this tools are for python up to 3.8 except for unpyc3
+wich is for 3.7.
+
 this script is based on darkkitten30's script (https://modthesims.info/t/532644) i'm aiming to decompile as many .pyc 
 files as possible by using the best tools available right now.
 
