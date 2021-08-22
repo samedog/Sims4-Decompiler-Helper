@@ -35,7 +35,7 @@ set TEMPDIR=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\Temp
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
 set UNPYC=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\unpyc3.py
 
-Call :CleanUp
+Call :CleanUp 1
 
 rem Main loop calls
 CALL :MainLoopFunction "base.zip"
@@ -95,8 +95,8 @@ rem ****************************************************************************
 	echo Moving folder to tree root
 	move "%TEMPDIR%\%FOLDERNAME%" "%FOLDERNAME%"
 	
-	echo Deleting Files and Folders
-	Call :CleanUp
+	echo Deleting temporal Files and Folders
+	Call :CleanUp 0
 EXIT /B 0
 
 rem this loops iterates over files and tries to decompile all pyc
@@ -174,9 +174,13 @@ EXIT /B 0
 EXIT /B 0
 
 :CleanUp
-	CALL :DeleteSafe temp
-	CALL :DeleteSafe base
-	CALL :DeleteSafe core
+	set initflag=%~1
+	
+	if %initflag% geq 1 (
+		CALL :DeleteSafe temp
+		CALL :DeleteSafe base
+		CALL :DeleteSafe core
+	)
 	CALL :DeleteSafe simulation
 EXIT /B 0
 
