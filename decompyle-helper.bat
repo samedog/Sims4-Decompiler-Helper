@@ -36,10 +36,11 @@ set UNPYC=PAH_TO_unpyc3.py
 
 echo Initial cleanup
 Call :CleanUp 1
+
 rem Main loop calls
-rem CALL :MainLoopFunction "base.zip"
+CALL :MainLoopFunction "base.zip"
 CALL :MainLoopFunction "core.zip"
-rem CALL :MainLoopFunction "simulation.zip"
+CALL :MainLoopFunction "simulation.zip"
 
 echo Done ... press any key to continue
 pause
