@@ -34,15 +34,17 @@ set TEMPDIR=TEMP_DIR_FOR_PROCESSING
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
 set UNPYC=PAH_TO_unpyc3.py
 
+echo Initial cleanup
 Call :CleanUp 1
-
 rem Main loop calls
-CALL :MainLoopFunction "base.zip"
+rem CALL :MainLoopFunction "base.zip"
 CALL :MainLoopFunction "core.zip"
-CALL :MainLoopFunction "simulation.zip"
+rem CALL :MainLoopFunction "simulation.zip"
 
 echo Done ... press any key to continue
 pause
+exit
+
 
 rem *********************************************************************************************************
 :MainLoopFunction
@@ -56,21 +58,12 @@ rem ****************************************************************************
 	
 	if %zipname% == base.zip (
 		set FOLDERNAME="base"
-		rem set ZIPPATH="libs\lib"
-		rem set FINALZIPNAME="base-src.zip"
-		rem set KEYLOCATION="%FOLDERNAME%\key"
 	)
 	if %zipname% == core.zip (
 		set FOLDERNAME=core
-		rem set ZIPPATH=core
-		rem set FINALZIPNAME="core-src.zip"
-		rem set KEYLOCATION=key
 	)
 	if %zipname% == simulation.zip (
 		set FOLDERNAME="simulation"
-		rem set ZIPPATH="simulation"
-		rem set FINALZIPNAME="simulation-src.zip"
-		rem set KEYLOCATION="key"
 	)
 	
 	"%ZIPPROGRAM%" x "%TEMPDIR%\%zipname%" -o"%TEMPDIR%\%FOLDERNAME%"
@@ -89,8 +82,6 @@ rem ****************************************************************************
 	echo Removing pyc files
 	del /s %TD%\*.pyc
 
-	rem echo Zipping %folder_name% folder
-	rem "%ZIPPROGRAM%" a %FINALZIPNAME% "%TEMPDIR%\%KEYLOCATION%" "%TEMPDIR%\%ZIPPATH%"
 	echo Moving folder to tree root
 	move "%TEMPDIR%\%FOLDERNAME%" "%FOLDERNAME%"
 	
@@ -174,7 +165,7 @@ EXIT /B 0
 				pip install git+https://github.com/rocky/python-decompile3
 				echo Done...
 			)
-			if %py_flag% geq 1(
+			if %py_flag% geq 1 (
 				echo %extra_steps%
 			)
 			echo '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
@@ -185,25 +176,28 @@ EXIT /B 0
 EXIT /B 0
 
 :CleanUp
-	set initflag=%~1
+	set initflag="%~1"
 	
-	if %initflag% geq 1 (
-		CALL :DeleteSafe temp
+	if %initflag% EQU "1" (
+		
 		CALL :DeleteSafe base
 		CALL :DeleteSafe core
+		CALL :DeleteSafe simulation
 	)
-	CALL :DeleteSafe simulation
+	
+	CALL :DeleteSafe Temp
 EXIT /B 0
 
 :DeleteSafe
 	set folder=%~1
-	echo Checking if your simulation dir exists at %folder%
+	
+	echo Checking if dir exists at %folder%
 	if exist "%folder%" (
 		echo File exists
-		del /f /q "%folder%"
+		del /f /q ".\%folder%"
 	)
 	if exist "%folder%" (
 		echo Folder exists
-		rmdir /q /s "%folder%"
+		rmdir /q /s ".\%folder%"
 	)
 EXIT /B 0
