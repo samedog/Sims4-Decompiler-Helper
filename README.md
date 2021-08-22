@@ -24,9 +24,9 @@ Launch from cmd, powershell, anaconda powershell or doubleclick
 
 
 this script has a really high success rate, it only fails to decompile 2 files: \base\lib\turtle.py and base\lib\_pydecimal.py, 
-i've tried pycdc, uncompyle, decompyle, easy python decompiler and unpyc3, since uncompyle is a rewrite of decompyle it's used
+i've tried pycdc, uncompyle, decompyle, easy python decompiler, and unpyc3, since uncompyle is a rewrite of decompyle it's used
 as main because of it's reliability, followed by decompyle and finally unpyc3. I ditched pycd because it generates windowed
-alerts and easypythondecompyler because it's outdated and not maintained anymore.
+alerts and has a success rate lower than unpyc3 and easypythondecompiler because it's outdated and not maintained anymore.
 
 
 
