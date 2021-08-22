@@ -23,16 +23,18 @@ CALL :VersionCheck decompyle3 %dcp3% %dcminver%
 CALL :VersionCheck uncompyle6 %ucp6% %ucminver%
 CALL :VersionCheck unpyc3 1 1
 
+
+exit 
 rem Decompile Stuff
 
 echo Go get yourself some coffee, and wait awhile, all 3 zip's used for code take forever to 
 echo decompile, so its going to take a bit.  Enjoy!
 
 echo Setting Directories...
-set SIMS4DIR=GAME_DIR
-set TEMPDIR=TEMP_DIR_FOR_PROCESSING
+set SIMS4DIR=C:\Games\The Sims 4
+set TEMPDIR=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\Temp
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
-set UNPYC=PAH_TO_unpyc3.py
+set UNPYC=C:\Users\demon\Documents\SIMS4 MODS\Forex ^& Investments\unpyc3.py
 
 echo Initial cleanup
 Call :CleanUp 1
@@ -46,7 +48,6 @@ echo Done ... press any key to continue
 pause
 exit
 
-
 rem *********************************************************************************************************
 :MainLoopFunction
 	set zipname=%~1
@@ -55,7 +56,6 @@ rem ****************************************************************************
 	echo "entering main function with %zipname%"
 	echo "Copying %zipname% to temp folder at %TEMPDIR%"
 	copy "%SIMS4DIR%\Data\Simulation\Gameplay\%zipname%" "%TEMPDIR%"
-	
 	
 	if %zipname% == base.zip (
 		set FOLDERNAME="base"
@@ -144,7 +144,8 @@ EXIT /B 0
 	if %program% == "unpyc3" ( set unpyc3_flag=1 )
 	rem we don't check for unpyc3 version, instead, we check if it exists
 	rem if no unpyc3 is being checked we go check the other programs
-	if "%unpyc3_flag%" geq "%min_ver%" (
+	
+	if not %unpyc3_flag% geq %min_ver% (
 		if exist "unpyc3.py" (
 			echo unpyc3 is installed.
 		) else (
@@ -180,12 +181,10 @@ EXIT /B 0
 	set initflag="%~1"
 	
 	if %initflag% EQU "1" (
-		
 		CALL :DeleteSafe base
 		CALL :DeleteSafe core
 		CALL :DeleteSafe simulation
 	)
-	
 	CALL :DeleteSafe Temp
 EXIT /B 0
 
