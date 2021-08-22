@@ -7,11 +7,12 @@ files as possible by using the best tools available right now.
 ```
 Requirenments:
 
+7zip (https://www.7-zip.org/download.html)
 decompyle3 (https://github.com/rocky/python-decompile3)
 uncompyle6 (https://pypi.org/project/uncompyle6/)
 unpyc3 (https://github.com/andrew-tavera/unpyc37/blob/master/unpyc3.py)
 ```
-uncompyle6 and unpyc3 will be downloaded automatically, so no need for manual install.
+All deps exectp 7zip will be downloaded automatically.
 
 Edit the script and fill as needed with NO quotation marks:  
 
