@@ -23,8 +23,6 @@ CALL :VersionCheck decompyle3 %dcp3% %dcminver%
 CALL :VersionCheck uncompyle6 %ucp6% %ucminver%
 CALL :VersionCheck unpyc3 1 1
 
-
-exit 
 rem Decompile Stuff
 
 echo Go get yourself some coffee, and wait awhile, all 3 zip's used for code take forever to 
