@@ -1,6 +1,6 @@
 ```
-this script is based on darkkitten30's script (https://modthesims.info/t/532644) i'm aiming to decompile as many .pyc files as
-possible by using the best tools available right now.
+this script is based on darkkitten30's script (https://modthesims.info/t/532644) i'm aiming to decompile as many .pyc 
+files as possible by using the best tools available right now.
 
 
 Requirenments:
@@ -20,9 +20,9 @@ set set UNPYC=PAH_TO_unpyc3.py
 
 launch from cmd, powershell or doubleclick
 
-this script has a really high success rate, it only fails to decompile \base\lib\turtle.py and base\lib\_pydecimal.py, i've tried 
-a lot of decompilers: pycdc, uncompyle, decompyle, easy python decompiler and unpyc3, since uncompyle is a rewrite of decompyle 
-it's used as main because of it's reliability, followed by decompyle and finally unpyc3.
+this script has a really high success rate, it only fails to decompile \base\lib\turtle.py and base\lib\_pydecimal.py, 
+i've tried a lot of decompilers: pycdc, uncompyle, decompyle, easy python decompiler and unpyc3, since uncompyle is 
+a rewrite of decompyle it's used as main because of it's reliability, followed by decompyle and finally unpyc3.
 ```
 
 
