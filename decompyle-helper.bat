@@ -1,7 +1,6 @@
 @echo off
-rem Batch file created by Darkkitten on 9/2/2014 at 9pm PST
-rem Batch file was updated by Darkkitten on 2/22/2019 at 5:20 CST
-rem Batch file modded by the_samedog on 08/22/2021 at 10:19 GMT-4
+rem Based on darkittens's script
+rem this batch uses 3 decompilers for max reliability
 
 rem Setting up Versions
 
