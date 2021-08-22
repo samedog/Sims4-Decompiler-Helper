@@ -16,6 +16,7 @@ edit and fill as needed:
 set SIMS4DIR=GAME_DIR
 
 set TEMPDIR=TEMP_DIR_FOR_PROCESSING
+
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
 
 set set UNPYC=PAH_TO_unpyc3.py
