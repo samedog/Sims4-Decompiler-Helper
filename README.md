@@ -19,7 +19,7 @@ Edit the script and fill as needed with NO quotation marks:
 set SIMS4DIR=GAME_DIR
 set TEMPDIR=TEMP_DIR_FOR_PROCESSING
 set ZIPPROGRAM=C:\Program Files\7-Zip\7z.exe
-set set UNPYC=PAH_TO_unpyc3.py
+set UNPYC=PAH_TO_unpyc3.py
 ```
 
 Launch from cmd, powershell, anaconda powershell or doubleclick
