@@ -1,6 +1,6 @@
 @echo off
 rem based on theBatch file created by Darkkitten
-rem version 1.0
+rem version 1.1
 
 rem Setting up Versions
 
