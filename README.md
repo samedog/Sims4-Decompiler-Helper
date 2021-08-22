@@ -1,5 +1,5 @@
 # Sims4-Decompiler-Helper
-this is a modified version of darkkitten30's script (https://modthesims.info/t/532644) i'm aiming to decompyle as many .pyc files as possible by using the best tools available right now.
+this script is based off darkkitten30's script (https://modthesims.info/t/532644) i'm aiming to decompyle as many .pyc files as possible by using the best tools available right now.
 
 
 Requirenments
